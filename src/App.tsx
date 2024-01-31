@@ -12,6 +12,7 @@ function App() {
     <p>Hello BIT</p>
     <span>Hello BIT</span>
     <small>Hello BIT</small>
+    <a href="/login">Login</a>
   </div>
   </>;
 }
