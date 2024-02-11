@@ -8,19 +8,5 @@ export default defineConfig({
         alias: {
             "@": path.resolve(__dirname, "./src"),
         },
-    },
-    build: {
-        lib: {
-            entry: path.resolve(__dirname, "src/main.ts"),
-            name: "react-antd-admin"
-        },
-        rollupOptions: {
-            external: ["react", "react-router", "react-router-dom", "react-redux"],
-            output: {
-                globals: {
-                    react: "React",
-                },
-            },
-        }
-    },
+    }
 })

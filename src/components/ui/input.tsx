@@ -10,7 +10,7 @@ export interface InputProps
 }
 
 const inputVariants = cva(
-    "w-full text-base text-foreground rounded-sm border border-input placeholder:text-gray placeholder:text-base",
+    "w-full h-2xl text-foreground rounded-sm border border-input placeholder:text-gray placeholder:text-base",
     {
         variants: {
             variant: {

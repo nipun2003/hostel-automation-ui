@@ -29,7 +29,8 @@
     --destructive-foreground: 210 20% 98%;
 
     --divider: 240 2 78;
-    --gray: 0, 0, 0, 0.6;
+    --gray: 102, 102, 102, 1;
+    --shadow:0, 0, 0, 0.12;
 
     --border: 220 13% 91% 1;
     --input: 0, 0, 0, 0.12;
@@ -37,6 +38,7 @@
  
     --radius: 12px;
     --text-base: 16px;
+    --space-base: 16px;
   }
 }
  
@@ -45,14 +47,14 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground md:px-[60px];
   }
 }
 
 
 @layer utilities{
   h1 {
-    @apply text-3xl font-semibold;
+    @apply text-2xl font-semibold;
   }
   h2{
     @apply text-2xl font-semibold;
