@@ -8,6 +8,12 @@ export interface BaseResponse<T> {
     data?: T
 }
 
+export type AuthUser = {
+    name: string;
+    email: string;
+    reg_no: string;
+}
+
 export type Student = {
     $collectionId: string;
     $createdAt: string;

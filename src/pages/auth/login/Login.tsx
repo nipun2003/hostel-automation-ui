@@ -8,6 +8,8 @@ import {Link, useNavigate} from "react-router-dom";
 import {Card} from "@/components/ui/card.tsx";
 import {toast} from "sonner";
 import authService from "@/services/AuthService.ts";
+import {useDispatch} from "react-redux";
+import {login} from "@/store/authSlice.ts";
 
 
 const LoginValidation = z.object({
@@ -17,6 +19,7 @@ const LoginValidation = z.object({
 
 export default function Login() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const formState = useForm<z.infer<typeof LoginValidation>>({
         resolver: zodResolver(LoginValidation),
         defaultValues: {
@@ -33,15 +36,15 @@ export default function Login() {
         }), {
             loading: 'Logging in...',
             success: (res) => {
-                console.log(res);
+                dispatch(login(res))
                 navigate("/", {replace: true})
                 return 'Logged in successfully';
             },
             error: error => {
                 console.log(error);
-                if(error.message){
+                if (error.message) {
                     const message = error.message.toString();
-                    return message.replace('email','registration number');
+                    return message.replace('email', 'registration number');
                 }
                 return error.message;
             }

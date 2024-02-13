@@ -1,6 +1,6 @@
 import {Account, Client, Databases, ID} from "appwrite";
 import conf from "@/conf/conf.ts";
-import {BaseResponse, Student} from "@/utils/models.ts";
+import {AuthUser, BaseResponse, Student} from "@/utils/models.ts";
 import {serverAxios} from "@/utils/AxiosUtils.ts";
 
 class AuthService {
@@ -46,18 +46,26 @@ class AuthService {
         }
         const student = res.data as Student;
         console.log("student", student)
-        const session = await this.account.createEmailSession(
+        await this.account.createEmailSession(
             student.email,
             password
         );
-        return session.userId;
+        const loggedInUser = await this.getCurrentUser();
+        if (!loggedInUser) throw new Error("Failed to login");
+        console.log("loggedInUser", loggedInUser);
+        const authUser: AuthUser = {
+            name: loggedInUser.name,
+            email: loggedInUser.email,
+            reg_no: student.reg_no,
+        }
+        return authUser;
     }
 
 
     async createPassword({password, email}: { password: string, email: string }) {
         await this.account.updatePassword(password);
         await this.account.updateEmail(email, password);
-        await this.account.deleteSessions();
+        await this.logout();
     }
 
     async getDetailFromRegistrationNumber(registrationNumber: string) {
@@ -78,6 +86,23 @@ class AuthService {
                 throw e;
             }
             throw new Error("Something went wrong. Please try again later.");
+        }
+    }
+
+    async getCurrentUser() {
+        try {
+            return await this.account.get();
+        } catch (e: unknown) {
+            console.log("Error getting account", e);
+            return null;
+        }
+    }
+
+    async logout() {
+        try {
+            await this.account.deleteSessions();
+        } catch (e: unknown) {
+            console.log("Error logging out", e);
         }
     }
 }

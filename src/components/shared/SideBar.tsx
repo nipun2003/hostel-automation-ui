@@ -12,6 +12,7 @@ export default function SideBar() {
             <div className="buttons flex flex-col gap-m">
                 {navButtons.map(button => {
                     return <NavLink to={button.href} key={button.href}
+                                    replace={true}
                                     className={({isActive}) => {
                                         return `w-full rounded-sm py-s px-sm flex items-center gap-sm ${isActive && 'bg-[#36407F] font-semibold'}`
                                     }}
@@ -22,6 +23,7 @@ export default function SideBar() {
                 })}
             </div>
             <NavLink to={"/help"}
+                     replace={true}
                      className={({isActive}) => {
                          return `w-full rounded-sm py-s px-sm flex items-center gap-sm ${isActive && 'bg-[#36407F] font-semibold'}`
                      }}
