@@ -1,6 +1,7 @@
-import {Account, Client, Databases, ID, Query} from "appwrite";
+import {Account, Client, Databases, ID} from "appwrite";
 import conf from "@/conf/conf.ts";
-import {Student} from "@/utils/models.ts";
+import {BaseResponse, Student} from "@/utils/models.ts";
+import {serverAxios} from "@/utils/AxiosUtils.ts";
 
 class AuthService {
     client = new Client();
@@ -29,27 +30,7 @@ class AuthService {
         return sessionToken.userId;
     }
 
-    async loginWithRegAndPassword({registrationNumber, password}: { registrationNumber: string, password: string }) {
-        const response = await this.database.listDocuments(
-            conf.appWriteDatabaseId,
-            conf.appWriteStudentCollectionId,
-            [
-                Query.equal("reg_no", registrationNumber),
-            ]
-        );
-        console.log("User details", response);
-        if (response.total === 0) {
-            throw new Error("No student found with this registration number");
-        }
-        const student = response.documents[0] as Student;
-        const session = await this.account.createEmailSession(
-            student.email,
-            password
-        );
-        return session.userId;
-    }
-
-    async verifyOtp({userId, otp, name}: { userId: string, otp: string, name: string, email: string }) {
+    async verifyOtp({userId, otp, name}: { userId: string, otp: string, name: string }) {
         const session = await this.account.updatePhoneSession(
             userId,
             otp
@@ -58,24 +39,46 @@ class AuthService {
         return session.userId;
     }
 
+    async loginWithRegAndPassword({registrationNumber, password}: { registrationNumber: string, password: string }) {
+        const res = await serverAxios.get("students/" + registrationNumber) as BaseResponse<Student>;
+        if (!res.success) {
+            throw new Error(res.message);
+        }
+        const student = res.data as Student;
+        console.log("student", student)
+        const session = await this.account.createEmailSession(
+            student.email,
+            password
+        );
+        return session.userId;
+    }
+
+
     async createPassword({password, email}: { password: string, email: string }) {
         await this.account.updatePassword(password);
         await this.account.updateEmail(email, password);
+        await this.account.deleteSessions();
     }
 
     async getDetailFromRegistrationNumber(registrationNumber: string) {
-        const response = await this.database.listDocuments(
-            conf.appWriteDatabaseId,
-            conf.appWriteStudentCollectionId,
-            [
-                Query.equal("reg_no", registrationNumber)
-            ]
-        );
-        console.log("User details", response);
-        if (response.total === 0) {
-            throw new Error("No student found with this registration number");
+        try {
+            const res = await serverAxios.post("check_reg", {
+                reg_no: registrationNumber
+            }) as BaseResponse<Student>
+            if (res.success) {
+                return res.data as Student
+            }
+            throw new Error(res.message);
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                const message = e.message;
+                if (message.includes("ID could not be found")) {
+                    throw new Error("Sorry, we couldn't find any student with this registration number. Please check and try again.");
+                }
+                throw e;
+            }
+            throw new Error("Something went wrong. Please try again later.");
         }
-        return response.documents[0] as Student;
     }
 }
 

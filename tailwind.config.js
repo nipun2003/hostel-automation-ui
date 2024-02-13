@@ -66,7 +66,7 @@ module.exports = {
         xs: 'calc(var(--text-base) * 0.75)',
         sm: 'calc(var(--text-base)*0.875)',
         base: 'var(--text-base)',
-        lg: 'calc(var(--text-base)*1.375)',
+        lg: 'calc(var(--text-base)*1.25)',
         xl: 'calc(var(--text-base)*1.5)',
         '2xl': 'calc(var(--text-base)*1.875)',
         '3xl': 'calc(var(--text-base)*2.125)',

@@ -1,3 +1,13 @@
+import {AxiosResponseHeaders, RawAxiosResponseHeaders} from "axios";
+
+export interface BaseResponse<T> {
+    success: boolean,
+    message?: string,
+    status: number,
+    headers: RawAxiosResponseHeaders | AxiosResponseHeaders
+    data?: T
+}
+
 export type Student = {
     $collectionId: string;
     $createdAt: string;

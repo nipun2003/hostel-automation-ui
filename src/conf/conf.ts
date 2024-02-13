@@ -4,5 +4,7 @@ const conf = {
     appWriteProjectId: String(env.VITE_APPWRITE_PROJECT_ID),
     appWriteDatabaseId: String(env.VITE_APPWRITE_DATABASE_ID),
     appWriteStudentCollectionId: String(env.VITE_APPWRITE_STUDENT_COLLECTION_ID),
+    serverBaseUrl : String(env.VITE_SERVER_URL),
+    siteTitle: String(env.VITE_SITE_TITLE)
 };
 export default conf;

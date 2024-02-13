@@ -47,7 +47,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground md:px-[60px];
+    @apply bg-background text-foreground;
   }
 }
 
@@ -57,13 +57,13 @@
     @apply text-2xl font-semibold;
   }
   h2{
-    @apply text-2xl font-semibold;
-  }
-  h3{
     @apply text-xl font-semibold;
   }
-  h4{
+  h3{
     @apply text-lg font-semibold;
+  }
+  h4{
+    @apply text-lg;
   }
   h5{
     @apply text-base font-semibold;

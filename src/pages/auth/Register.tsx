@@ -8,6 +8,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input.tsx";
 import authService from "@/services/AuthService.ts";
 import {toast} from "sonner";
+import useRegister from "@/hooks/useRegister.ts";
 
 const RegisterValidation = z.object({
     registration: z.string().length(11, {message: 'Registration number must be 11 characters long'}),
@@ -15,10 +16,12 @@ const RegisterValidation = z.object({
 
 export default function Register() {
     const navigate = useNavigate();
+
+    const {registerData, updateData} = useRegister();
     const formState = useForm<z.infer<typeof RegisterValidation>>({
         resolver: zodResolver(RegisterValidation),
         defaultValues: {
-            registration: '',
+            registration: registerData.student?.reg_no || "",
         }
     })
 
@@ -27,7 +30,9 @@ export default function Register() {
         toast.promise(authService.getDetailFromRegistrationNumber(values.registration), {
             loading: 'Loading...',
             success: (res) => {
-                navigate("details", {state: {user: res}})
+                const data = {...registerData, student: res}
+                updateData(data)
+                navigate("details", {state: data})
                 return `Student found with name ${res.name}`
             },
             error: error => {

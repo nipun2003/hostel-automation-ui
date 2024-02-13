@@ -1,33 +1,39 @@
-import {useLocation, useNavigate} from "react-router-dom";
-import {Student} from "@/utils/models.ts";
+import {Navigate, useNavigate} from "react-router-dom";
 import {Card} from "@/components/ui/card.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Label} from "@/components/ui/label.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import authService from "@/services/AuthService.ts";
 import {toast} from "sonner";
+import useRegister from "@/hooks/useRegister.ts";
 
 export default function AccountDetails() {
-    const {state} = useLocation();
-    const student = state?.user as Student;
     const navigate = useNavigate();
+
+    const {registerData, updateData} = useRegister();
+    const student = registerData.student;
+
+    if (!student) {
+        toast.error('Something went wrong, please try again');
+        return <Navigate to={'/register'} replace={true} state={null}/>
+    }
 
     const sendOtp = () => {
         // send otp to the mobile number
         if (!student) return;
-        console.log(student.phone_no);
-        toast.promise(authService.sendOtp(student.phone_no), {
+        console.log(student?.phone_no);
+        toast.promise(authService.sendOtp(student?.phone_no), {
             loading: 'Sending OTP...',
             success: res => {
                 console.log(res);
                 if (!res) return toast.error('Failed to send OTP');
+                const data = {...registerData, userId: res}
+                updateData(data);
                 navigate('/register/verify', {
-                    state: {
-                        userId: res, phoneNo: student.phone_no,
-                        name: student.name, email: student.email
-                    }
+                    state: data,
+                    replace: true
                 });
-                return 'OTP sent to your mobile number: ' + student.phone_no;
+                return 'OTP sent to your mobile number: ' + student?.phone_no;
             },
             error: 'Failed to send OTP'
         });

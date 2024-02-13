@@ -3,11 +3,12 @@ import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form.tsx";
 import {z} from "zod";
-import {useLocation, useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {toast} from "sonner";
 import authService from "@/services/AuthService.ts";
+import useRegister from "@/hooks/useRegister.ts";
 
 const PasswordValidation = z.object({
     password: z.string().min(8, {message: 'Password must be at least 8 characters long'}),
@@ -24,9 +25,9 @@ const PasswordValidation = z.object({
 
 export default function CreateNewPassword() {
     const navigate = useNavigate();
-    const {state} = useLocation();
-    const userId = state?.userId;
-    const email = state?.email;
+    const {registerData} = useRegister();
+    const userId = registerData.userId;
+    const email = registerData.student?.email;
     const formState = useForm<z.infer<typeof PasswordValidation>>({
         resolver: zodResolver(PasswordValidation),
         defaultValues: {
@@ -35,6 +36,11 @@ export default function CreateNewPassword() {
         }
     })
 
+    if (!email || !userId) {
+        toast.error('Something went wrong, please try again.');
+        return <Navigate to={'/register'} state={null} replace={true}/>
+    }
+
     const onSubmit = (values: z.infer<typeof PasswordValidation>) => {
         console.log(values)
         if (!userId) return toast.error('User not found');
@@ -42,10 +48,12 @@ export default function CreateNewPassword() {
             loading: 'Creating password...',
             success: (res) => {
                 console.log(res)
-                navigate("/", {replace: true})
-                return 'Password created successfully';
+                navigate("/login", {replace: true})
+                return 'Password created successfully, you can login with your reg no and password now.';
             },
-            error: 'Failed to create password'
+            error: error => {
+                return error.message
+            }
         });
     }
     return <main
