@@ -8,7 +8,7 @@ export const navButtons: Array<NavItem> = [
     {
         name: "My Profile",
         icon: "img/profile.svg",
-        href: "/profile"
+        href: "/"
     },
     {
         name: "Hostel Allotment",

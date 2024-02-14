@@ -8,32 +8,28 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input.tsx";
 import authService from "@/services/AuthService.ts";
 import {toast} from "sonner";
-import useRegister from "@/hooks/useRegister.ts";
 
 const RegisterValidation = z.object({
     registration: z.string().length(11, {message: 'Registration number must be 11 characters long'}),
 });
 
-export default function Register() {
+export default function ForgotPassword() {
     const navigate = useNavigate();
 
-    const {registerData, updateData} = useRegister();
     const formState = useForm<z.infer<typeof RegisterValidation>>({
         resolver: zodResolver(RegisterValidation),
         defaultValues: {
-            registration: registerData.student?.reg_no || "",
+            registration: "",
         }
     })
 
     const onSubmit = (values: z.infer<typeof RegisterValidation>) => {
         console.log(values)
-        toast.promise(authService.checkRegistrationNumberForNewUser(values.registration), {
+        toast.promise(authService.checkRegForForgotPassword(values.registration), {
             loading: 'Loading...',
             success: (res) => {
-                const data = {...registerData, student: res}
-                updateData(data)
-                navigate("details", {state: data})
-                return `Student found with name ${res.name}`
+                navigate("/login", {replace: true})
+                return `An email is sent to ${res.email} with a link to reset your password`
             },
             error: error => {
                 return error.message
@@ -46,7 +42,10 @@ export default function Register() {
             <Form {...formState}>
                 <form onSubmit={formState.handleSubmit(onSubmit)}
                       className={'flex flex-col gap-3xl'}>
-                    <h1>Create your account</h1>
+                    <div>
+                        <h1>Forgot Password</h1>
+                        <span className={'text-gray'}>A verification email will be sent to your registered email</span>
+                    </div>
                     {/*Registration Number field*/}
                     <FormField
                         control={formState.control}
@@ -66,7 +65,7 @@ export default function Register() {
             </Form>
         </Card>
         <div className="flex items-center gap-1">
-            <strong className="text-gray">Already have an account?</strong>
+            <strong className="text-gray">Remember your password?</strong>
             <Button variant={'link'} onClick={() => navigate(-1)}>Login</Button>
         </div>
     </main>

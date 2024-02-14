@@ -11,6 +11,7 @@ import {useDispatch} from "react-redux";
 import authService from "@/services/AuthService.ts";
 import {AuthUser} from "@/utils/models.ts";
 import {login, logout} from "@/store/authSlice.ts";
+import ForgotPassword, {ResetPassword} from "@/pages/auth/ForgotPassword";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -25,6 +26,8 @@ const router = createBrowserRouter(
             </Route>
             <Route element={<AuthLayout/>}>
                 <Route path="/login" element={<Login/>}/>
+                <Route path="/forgot-password" element={<ForgotPassword/>}/>
+                <Route path="/reset-password" element={<ResetPassword/>}/>
                 <Route path="/register" element={<RegisterProvider/>}>
                     <Route path={""} element={<Register/>}/>
                     <Route path={"details"} element={<AccountDetails/>}/>

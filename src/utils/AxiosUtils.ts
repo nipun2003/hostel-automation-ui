@@ -37,7 +37,7 @@ const createAxiosInstance = (baseURL: string): AxiosInstance => {
         (res) => {
             const data = res.data;
             console.log("Success Response:: ", data);
-            if (data.success) {
+            if (data.success !== undefined) {
                 return {...data, status: res.status, headers: res.headers};
             }
             return {
