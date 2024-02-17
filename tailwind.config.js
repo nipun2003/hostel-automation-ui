@@ -18,23 +18,27 @@ module.exports = {
     extend: {
       colors: {
         border: "hsl(var(--border))",
-        input: "rgba(var(--input))",
+        input: "hsla(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        surface: {
+          DEFAULT: "hsl(var(--surface))",
+          foreground: "hsl(var(--surface-foreground))",
+        },
         primary: {
-          DEFAULT: "rgba(var(--primary))",
-          foreground: "rgba(var(--primary-foreground))",
+          DEFAULT: "hsla(var(--primary))",
+          foreground: "hsla(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "rgba(var(--secondary))",
+          DEFAULT: "hsla(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
         divider:{
           DEFAULT: "hsl(var(--divider))",
         },
         gray:{
-          DEFAULT: " rgba(var(--gray))",
+          DEFAULT: " hsla(var(--gray))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -45,7 +49,7 @@ module.exports = {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "rgba(var(--accent))",
+          DEFAULT: "hsla(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
@@ -85,9 +89,9 @@ module.exports = {
         '5xl': 'calc(var(--space-base)*4.5)',
       },
       boxShadow: {
-        DEFAULT: '0px 4px 8px 0px rgba(var(--shadow))',
-        lg: '0px 4px 12px 0px rgba(var(--shadow))',
-        xl: '0px 16px 16px rgba(var(--shadow))',
+        DEFAULT: '0px 4px 8px 0px hsla(var(--shadow))',
+        lg: '0px 4px 12px 0px hsla(var(--shadow))',
+        xl: '0px 16px 16px hsla(var(--shadow))',
       },
       keyframes: {
         "accordion-down": {
