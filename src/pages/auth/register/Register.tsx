@@ -59,7 +59,7 @@ export default function Register() {
 			<Helmet>
 				<title>{conf.siteTitle} - Register</title>
 			</Helmet>
-			<Container4 className="w-full overflow-y-auto overflow-x-hidden flex flex-col justify-center items-center gap-xl px-m py-sm custom-scrollbar">
+			<Container4 className="w-full overflow-y-auto overflow-x-hidden flex flex-col justify-center items-center gap-xl custom-scrollbar">
 				<Card className={"px-xl pt-4xl pb-5xl w-full"}>
 					<Form {...formState}>
 						<form

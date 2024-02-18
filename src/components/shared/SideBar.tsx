@@ -1,12 +1,13 @@
 import authService from "@/services/AuthService";
-import { AuthState, logout } from "@/store/authSlice";
+import { logout } from "@/store/authSlice";
+import { RootState } from "@/store/store";
 import { navButtons } from "@/utils/Constants.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function SideBar() {
-	const authState = useSelector((state) => state.auth as AuthState);
+	const authState = useSelector((state: RootState) => state.auth);
 	const dispatch = useDispatch();
 
 	return (

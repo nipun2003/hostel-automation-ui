@@ -47,7 +47,7 @@ export default function AccountDetails() {
 	return (
 		<Container8
 			className={
-				"w-full h-full overflow-y-auto flex flex-col justify-center items-center px-m py-sm "
+				"w-full h-full overflow-y-auto flex flex-col justify-center items-center"
 			}
 		>
 			<Card className={"px-3xl pt-4xl pb-5xl w-full space-y-5xl"}>

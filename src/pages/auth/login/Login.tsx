@@ -78,7 +78,7 @@ export default function Login() {
 			<Helmet>
 				<title>{conf.siteTitle} - Login</title>
 			</Helmet>
-			<Container4 className=" flex flex-col justify-center items-center gap-l px-m py-sm ">
+			<Container4 className=" flex flex-col justify-center items-center gap-l ">
 				<img src={"/img/logo.png"} alt={"logo"} width={"72"} height={"85.53"} />
 				<Card className={"px-xl pt-4xl pb-3xl w-full"}>
 					<Form {...formState}>

@@ -111,6 +111,13 @@ module.exports = {
     fontFamily: {
       sans: ['Poppins', 'sans-serif'],
       mono: ['JetBrains Mono', 'monospace'],
+    },
+    screens : {
+      'sm': '640px',
+      'md': '1024px',
+      'lg': '1440px',
+      'xl': '1280px',
+      '2xl': '1400px',
     }
   },
   plugins: [require("tailwindcss-animate")],

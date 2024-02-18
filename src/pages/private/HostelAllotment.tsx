@@ -33,7 +33,11 @@ export default function HostelAllotment() {
 			password: "",
 		},
 	});
-	const onSubmit = (values: z.infer<typeof LoginValidation>) => {};
+	const onSubmit = (values: z.infer<typeof LoginValidation>) => {
+		console.log(values);
+		setLoading(true);
+		setLoading(false);
+	};
 	return (
 		<>
 			<Helmet>

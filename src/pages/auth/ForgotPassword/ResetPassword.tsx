@@ -86,7 +86,7 @@ export default function ResetPassword() {
 			<Helmet>
 				<title>{conf.siteTitle} - Reset Password</title>
 			</Helmet>
-			<Container4 className="flex flex-col justify-center items-center gap-xl px-m py-sm custom-scrollbar">
+			<Container4 className="flex flex-col justify-center items-center gap-xl custom-scrollbar">
 				<Card className={"px-xl pt-4xl pb-5xl w-full"}>
 					<Form {...formState}>
 						<form

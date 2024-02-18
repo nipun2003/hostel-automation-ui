@@ -7,7 +7,7 @@ const Container8 = React.forwardRef<
 	<div
 		ref={ref}
 		className={cn(
-			"w-full md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 overflow-y-auto overflow-x-hidden custom-scrollbar",
+			"w-full sm:col-span-10 sm:col-start-2 lg:col-span-8 lg:col-start-3 overflow-y-auto overflow-x-hidden px-m py-sm sm:px-0 custom-scrollbar",
 			className
 		)}
 		{...props}

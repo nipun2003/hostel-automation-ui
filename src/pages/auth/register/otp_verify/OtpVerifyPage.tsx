@@ -100,7 +100,7 @@ export default function OtpVerifyPage() {
 		});
 	};
 	return (
-		<Container4 className="flex flex-col justify-center items-center gap-xl px-m py-sm custom-scrollbar">
+		<Container4 className="flex flex-col justify-center items-center gap-xl custom-scrollbar">
 			<Card className={"px-xl pt-4xl pb-3xl w-full"}>
 				<Form {...formState}>
 					<form
