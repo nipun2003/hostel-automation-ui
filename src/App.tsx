@@ -1,5 +1,6 @@
 import {
 	createBrowserRouter,
+	createHashRouter,
 	createRoutesFromElements,
 	Route,
 	RouterProvider,
@@ -23,7 +24,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import BusySpinner from "./components/shared/BusySpinner.tsx";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
 	createRoutesFromElements(
 		<>
 			<Route path="/" element={<MainLayout />}>
