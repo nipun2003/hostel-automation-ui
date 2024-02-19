@@ -19,17 +19,16 @@ export default defineConfig({
 	},
 	build: {
 		rollupOptions: {
-            // make sure to externalize deps that shouldn't be bundled
-            // into your library
-            external: ['react','react-router','react-router-dom','react-redux'],
-            output: {
-              // Provide global variables to use in the UMD build
-              // for externalized deps
-              globals: {
-                vue: 'React',
-              },
-            },
-          },
+			// make sure to externalize deps that shouldn't be bundled
+			// into your library
+			external: ["react", "react-router", "react-router-dom", "react-redux"],
+			output: {
+				// Provide global variables to use in the UMD build
+				// for externalized deps
+				globals: {
+					vue: "React",
+				},
+			},
 		},
 	},
 });
