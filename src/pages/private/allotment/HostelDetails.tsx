@@ -38,9 +38,8 @@ export default function HostelDetails() {
 	const details = StoragePref.get();
 	const hostels = hostelData[`${batch}${gender}`] || [];
 	const onContinueClick = () => {
-		const hostelNumbers = [1, 2, 3, 4, 5, 6, 14, 17, 18, 19];
 		const hostelNo =
-			hostelNumbers[Math.floor(Math.random() * hostelNumbers.length)];
+			hostels[Math.floor(Math.random() * hostels.length)];
 		const roomNo = Math.floor(Math.random() * 100) + 1;
 		StoragePref.set({ ...details, hostel_no: hostelNo, room_no: roomNo });
 		navigate("/fee-payment");
