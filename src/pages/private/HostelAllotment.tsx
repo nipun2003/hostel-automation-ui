@@ -26,6 +26,7 @@ import { Label } from "@radix-ui/react-label";
 import { useState } from "react";
 import Helmet from "react-helmet";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const LoginValidation = z.object({
@@ -54,6 +55,7 @@ const LoginValidation = z.object({
 export default function HostelAllotment() {
 	const [loading, setLoading] = useState(false);
 	const { user } = useAuth();
+	const navigate = useNavigate();
 	const formState = useForm<z.infer<typeof LoginValidation>>({
 		resolver: zodResolver(LoginValidation),
 		defaultValues: {
@@ -149,7 +151,15 @@ export default function HostelAllotment() {
 								)}
 							/>
 						</div>
-						<Button type={"submit"} disabled={loading}>
+						<Button
+							type={"submit"}
+							disabled={loading}
+							onClick={() => {
+								navigate("details", {
+									state: user?.reg_no,
+								});
+							}}
+						>
 							{loading ? <Spinner /> : "Continue"}
 						</Button>
 					</form>

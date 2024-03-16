@@ -22,17 +22,25 @@ import { AuthUser } from "@/utils/models.ts";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import BusySpinner from "./components/shared/BusySpinner.tsx";
+import HostelDetails from "./pages/private/allotment/HostelDetails.tsx";
+import ProfilePage from "./pages/private/ProfilePage.tsx";
+import FeeDetails from "./pages/private/allotment/FeeDetails.tsx";
+import ElectricityFee from "./pages/private/allotment/payments/ElectricityFee.tsx";
+import HostelFee from "./pages/private/allotment/payments/HostelFee.tsx";
 
 const router = createHashRouter(
 	createRoutesFromElements(
 		<>
 			<Route path="/" element={<MainLayout />}>
-				<Route path={""} element={<HostelAllotment />} />
+				<Route path={""} element={<ProfilePage />} />
 				<Route path={"allotment"} element={<HostelAllotment />} />
-				<Route path={"fee-payment"} element={<HostelAllotment />} />
-				<Route path={"notifications"} element={<HostelAllotment />} />
-				<Route path={"complain"} element={<HostelAllotment />} />
-				<Route path={"help"} element={<HostelAllotment />} />
+				<Route path={"allotment/details"} element={<HostelDetails />} />
+				<Route path={"fee-payment"} element={<FeeDetails />} />
+				<Route path={"fee-payment/electricity"} element={<ElectricityFee />} />
+				<Route path={"fee-payment/hostel"} element={<HostelFee />} />
+				<Route path={"notifications"} element={<ProfilePage />} />
+				<Route path={"complain"} element={<ProfilePage />} />
+				<Route path={"help"} element={<ProfilePage />} />
 			</Route>
 			<Route element={<AuthLayout />}>
 				<Route path="/login" element={<Login />} />

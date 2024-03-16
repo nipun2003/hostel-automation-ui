@@ -34,6 +34,10 @@ module.exports = {
           DEFAULT: "hsla(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
+        tertiary:{
+DEFAULT: "hsla(var(--tertiary))",
+          foreground: "hsl(var(--tertiary-foreground))",
+        },
         divider:{
           DEFAULT: "hsl(var(--divider))",
         },
