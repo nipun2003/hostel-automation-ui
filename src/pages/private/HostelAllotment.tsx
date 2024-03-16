@@ -66,6 +66,9 @@ export default function HostelAllotment() {
 	});
 	const onSubmit = (values: z.infer<typeof LoginValidation>) => {
 		console.log(values);
+		navigate("details", {
+			state: values,
+		});
 		setLoading(true);
 		setLoading(false);
 	};
@@ -151,15 +154,7 @@ export default function HostelAllotment() {
 								)}
 							/>
 						</div>
-						<Button
-							type={"submit"}
-							disabled={loading}
-							onClick={() => {
-								navigate("details", {
-									state: user?.reg_no,
-								});
-							}}
-						>
+						<Button type={"submit"} disabled={loading}>
 							{loading ? <Spinner /> : "Continue"}
 						</Button>
 					</form>
