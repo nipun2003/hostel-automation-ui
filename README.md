@@ -8,6 +8,7 @@ Before you begin, ensure you have the following installed on your machine:
 
 - [Node.js](https://nodejs.org/en/download/) (version 18.x or later)
 - [npm](https://www.npmjs.com/get-npm) (version 8.x or later)
+- [App Write](https://cloud.appwrite.io/)(Auth, Database and Storage)
 
 ## Installation
 
@@ -24,6 +25,8 @@ Install the project dependencies:
 ```bash
 npm install
 ```
+
+Create the `.env.local` from `.env.sample` at root of the project.
 
 ## Running the App
 
